@@ -1,0 +1,44 @@
+body {
+  background: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+.main-container {
+  text-align: center;
+  padding: 20px;
+}
+.main-buttons, .grid {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+}
+.grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  max-width: 600px;
+  margin: auto;
+}
+.btn {
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 18px;
+  display: block;
+}
+.blue { background: #3498db; color: white; }
+.green { background: #2ecc71; color: white; }
+.white { background: white; border: 1px solid #ccc; }
+.busy { background: #ffeaea; border-radius: 5px; margin: 5px 0; padding: 5px; }
+input, select, button {
+  display: block;
+  width: 80%;
+  margin: 8px auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+button {
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
