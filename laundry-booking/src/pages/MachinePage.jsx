@@ -68,7 +68,7 @@ export default function MachinePage() {
 
   // Удалить бронь
   const handleDelete = async (bookingId, bookingPassword) => {
-    if (password === "2025" || password === bookingPassword) {
+    if (password === "147258369" || password === bookingPassword) {
       await deleteDoc(doc(db, "bookings", bookingId));
       alert("Бронь удалена!");
       window.location.reload();
