@@ -19,7 +19,7 @@ export default function MachinePage() {
   const [startTime, setStartTime] = useState("");
   const [password, setPassword] = useState("");
 
-  // Длительность режимов
+  // Длительности режимов
   const modeDurations = {
     fast: 40,
     delicate: 60,
@@ -27,7 +27,7 @@ export default function MachinePage() {
     intensive: 120,
   };
 
-  // Загрузка броней из Firestore
+  // Загружаем брони из Firestore
   useEffect(() => {
     const fetchBookings = async () => {
       const querySnapshot = await getDocs(collection(db, "bookings"));
@@ -39,7 +39,7 @@ export default function MachinePage() {
     fetchBookings();
   }, [type, id]);
 
-  // Добавить бронь
+  // Добавление брони
   const handleBooking = async () => {
     if (!room || !phone || !startTime) {
       alert("Заполните все поля!");
@@ -58,7 +58,7 @@ export default function MachinePage() {
       mode,
       startTime: start.toISOString(),
       endTime: end.toISOString(),
-      password: password || "2025",
+      password: password || "2025", // пароль по умолчанию
     };
 
     await addDoc(collection(db, "bookings"), booking);
@@ -66,7 +66,7 @@ export default function MachinePage() {
     window.location.reload();
   };
 
-  // Удалить бронь
+  // Удаление брони
   const handleDelete = async (bookingId, bookingPassword) => {
     if (password === "147258369" || password === bookingPassword) {
       await deleteDoc(doc(db, "bookings", bookingId));
@@ -78,7 +78,7 @@ export default function MachinePage() {
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>
         {type === "washers" ? "Стиральная машина" : "Сушильная машина"} №{id}
       </h2>
@@ -87,7 +87,7 @@ export default function MachinePage() {
       <ul>
         {bookings.map((b) => (
           <li key={b.id}>
-            {b.room}, {b.phone}, режим: {b.mode},{" "}
+            Комната: {b.room}, Телефон: {b.phone}, режим: {b.mode},{" "}
             {new Date(b.startTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}{" "}
             →{" "}
             {new Date(b.endTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -103,29 +103,34 @@ export default function MachinePage() {
         value={room}
         onChange={(e) => setRoom(e.target.value)}
       />
+      <br />
       <InputMask
         mask="+7-999-999-99-99"
         placeholder="+7-___-___-__-__"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
+      <br />
       <select value={mode} onChange={(e) => setMode(e.target.value)}>
         <option value="fast">Быстрый (40 мин)</option>
         <option value="delicate">Деликатный (60 мин)</option>
         <option value="normal">Обычный (90 мин)</option>
         <option value="intensive">Интенсивный (120 мин)</option>
       </select>
+      <br />
       <input
         type="datetime-local"
         value={startTime}
         onChange={(e) => setStartTime(e.target.value)}
       />
+      <br />
       <input
         type="password"
         placeholder="Пароль (по умолчанию 2025)"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <br />
       <button onClick={handleBooking}>Забронировать</button>
     </div>
   );

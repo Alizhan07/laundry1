@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 
 export default function Washers() {
-  const washers = Array.from({ length: 10 }, (_, i) => i + 1);
+  const washers = [1, 2, 3];
   return (
-    <div className="grid">
-      {washers.map((id) => (
-        <Link key={id} to={`/washer/${id}`} className="btn white">
-          Стиральная {id}
-        </Link>
-      ))}
+    <div>
+      <h2>Стиральные машины</h2>
+      <ul>
+        {washers.map((id) => (
+          <li key={id}>
+            <Link to={`/washers/${id}`}>Стиральная машина №{id}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
